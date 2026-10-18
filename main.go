@@ -1,24 +1,3 @@
-// Copyright 2023 The Go Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
-// Hello is a hello, world program, demonstrating
-// how to write a simple command-line program.
-//
-// Usage:
-//
-//	hello [options] [name]
-//
-// The options are:
-//
-//	-g greeting
-//		Greet with the given greeting, instead of "Hello".
-//
-//	-r
-//		Greet in reverse.
-//
-// By default, hello greets the world.
-// If a name is specified, hello greets that name instead.
 package main
 
 import (
@@ -27,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/Digi00-wq/MaceNGo/reverse"
+	"MaceNGo/reverse"
 )
 
 func usage() {

@@ -1,3 +1,3 @@
-module github.com/Digi00-wq/MaceNGo
+module MaceNGo
 
 go 1.19

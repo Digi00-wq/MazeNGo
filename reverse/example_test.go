@@ -7,7 +7,7 @@ package reverse_test
 import (
 	"fmt"
 
-	"github.com/Digi00-wq/MaceNGo/reverse"
+	"MaceNGo/reverse"
 )
 
 func ExampleString() {
