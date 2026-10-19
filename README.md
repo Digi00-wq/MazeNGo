@@ -12,7 +12,6 @@ MazeNGo is a mutlithreaded maze solving experiment
 
 
 ## Tasks
-- [ ] assign project tasks
 
 ### Maze solving
 - [ ] implement BFS single threaded
