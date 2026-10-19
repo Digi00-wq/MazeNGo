@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	display.Init_window()
+	display.InitWindow()
 }

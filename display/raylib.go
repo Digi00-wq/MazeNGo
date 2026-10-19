@@ -4,8 +4,14 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-func Init_window() {
-	rl.InitWindow(1920, 1080, "MazeNGo")
+var (
+	fontSize int32 = 20
+	text           = "Hello world"
+)
+
+func InitWindow() {
+	rl.SetConfigFlags(rl.FlagWindowResizable)
+	rl.InitWindow(200, 100, "MazeNGo")
 	defer rl.CloseWindow()
 
 	rl.SetTargetFPS(60)
@@ -14,10 +20,18 @@ func Init_window() {
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.RayWhite)
 
-		rl.DrawText("Hello world", 190, 200, 20, rl.LightGray)
+		rl.DrawText(text, getMiddleWidth(), getMiddleHeight(), fontSize, rl.Black)
 
 		rl.EndDrawing()
 
 	}
 
+}
+
+func getMiddleHeight() int32 {
+	return int32(rl.GetRenderHeight()/2) - fontSize/2
+}
+
+func getMiddleWidth() int32 {
+	return int32(rl.GetRenderWidth()/2) - fontSize*3
 }
