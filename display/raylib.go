@@ -7,6 +7,7 @@ import (
 var (
 	fontSize int32 = 20
 	text           = "Hello world"
+	maze           = [5][5]int{{1, 1, 1, 1, 1}, {1, 0, 0, 0, 1}, {1, 1, 0, 0, 1}, {1, 0, 1, 0, 1}, {1, 1, 1, 1, 1}}
 )
 
 func InitWindow() {
@@ -16,12 +17,23 @@ func InitWindow() {
 
 	rl.SetTargetFPS(60)
 
+	var basePosX int32 = 300
+	var basePosY int32 = 200
+	var size int32 = 20
+
 	for !rl.WindowShouldClose() {
 		rl.BeginDrawing()
-		rl.ClearBackground(rl.RayWhite)
+		rl.ClearBackground(rl.White)
+		for i := range maze {
+			for j := range maze[0] {
+				if maze[j][i] == 1 {
+					rl.DrawRectangle(basePosX+size*int32(i), basePosY+size*int32(j), size, size, rl.Black)
+				} else {
 
-		rl.DrawText(text, getMiddleWidth(), getMiddleHeight(), fontSize, rl.Black)
-
+					rl.DrawRectangle(basePosX+size*int32(i), basePosY+size*int32(j), size, size, rl.Green)
+				}
+			}
+		}
 		rl.EndDrawing()
 
 	}
