@@ -2,25 +2,42 @@
 
 MazeNGo is a mutlithreaded maze solving experiment
 
-# Tasks
+[TOC]
 
-- branching
-  - main
-    - current working version
-  - dev
-    - development
-  - feat
-    - new features
+## Branching
+- main
+  - current working version
+- dev
+  - development
+- feat
+  - new features
 
+
+## Tasks
 - [ ] assign project tasks
-- [ ] implement BFS (single, multi and limited threaded)
-- [ ] implement DFS (single, mutli and limited threaded)
+
+### Maze solving
+- [ ] implement BFS single threaded
+- [ ] implement BFS multi threaded
+- [ ] implement BFS limited threaded
+- [ ] implement DFS single threaded
+- [ ] implement DFS multi threaded
+- [ ] implement DFS limited threaded
 - [ ] implement A*
 - [ ] implement Dijkstra
+- [ ] implement two side Dijkstra
+
+### Maze generation
+- [ ] implement reverese DFS
+- [ ] implement Prim's Algorithem
+- [ ] implement Kruskal's Algorithem
+- [ ] implement recursive division
+- [ ] implement post processing for non looping algorithems to introduce loops through wall removal
+- [ ] implement Cellular Automata algorithems
+
 
 ## feet order
 
-1. Gui with simple maze algorythem
-2. single thread bfs & dfs
-3. expand to mutlithread and limited thread
-4. Expand on all :)
+1. Gui with simple maze algorithem
+2. Single thread BFS & DFS
+3. Expand on all :) (TBD)
