@@ -1,7 +1,7 @@
 package main
 
 import (
-	"MaceNGo/display"
+	"MazeNGo/display"
 )
 
 func main() {

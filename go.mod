@@ -1,4 +1,4 @@
-module MaceNGo
+module MazeNGo
 
 go 1.26.5
 
