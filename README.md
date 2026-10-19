@@ -28,7 +28,7 @@ MazeNGo is a mutlithreaded maze solving experiment
 ### Maze generation
 
 - [ ] implement reverese DFS
-- [ ] implement Prim's Algorithem
+- [ ] implement Prim's Algorithem Diego
 - [ ] implement Kruskal's Algorithem
 - [ ] implement recursive division
 - [ ] implement post processing for non looping algorithems to introduce loops through wall removal
