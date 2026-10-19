@@ -2,8 +2,6 @@
 
 MazeNGo is a mutlithreaded maze solving experiment
 
-[TOC]
-
 ## Branching
 - main
   - current working version
