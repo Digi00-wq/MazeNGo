@@ -3,6 +3,7 @@ package main
 import (
 	"MazeNGo/display"
 	"MazeNGo/prim"
+	"fmt"
 	"time"
 )
 
@@ -15,5 +16,9 @@ func main() {
 
 func tutorMain(a chan [][]int) {
 	time.Sleep(100)
-	prim.CreateMaze(5, a)
+	for {
+		var i int
+		fmt.Scan(&i)
+		prim.CreateMaze(i, a)
+	}
 }
