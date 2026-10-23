@@ -18,7 +18,7 @@ MazeNGo is a mutlithreaded maze solving experiment
 - [ ] implement BFS single threaded
 - [ ] implement BFS multi threaded
 - [ ] implement BFS limited threaded
-- [ ] implement DFS single threaded
+- [ ] implement DFS single threaded Diego
 - [ ] implement DFS multi threaded
 - [ ] implement DFS limited threaded
 - [ ] implement A*
