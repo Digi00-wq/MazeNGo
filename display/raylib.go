@@ -40,8 +40,8 @@ func getMiddleWidth() int32 {
 
 func updateField(maze [][]prim.FieldType) {
 
-	var basePosX int32 = 300
-	var basePosY int32 = 200
+	var basePosX int32 = 50
+	var basePosY int32 = 50
 	var size int32 = 20
 	offset := 10
 	rl.BeginDrawing()
