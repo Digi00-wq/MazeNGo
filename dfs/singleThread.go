@@ -52,6 +52,7 @@ func SolveMaze(field [][]prim.FieldType, size int) {
 	rng := rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	startingPoint := prim.Point{X: 1, Y: 1}
+	field[startingPoint.X][startingPoint.Y] = prim.FieldStart
 	endPoint := prim.Point{X: rng.Intn(len(field)-2) + 1, Y: rng.Intn(len(field)-2) + 1}
 	for {
 		if field[endPoint.X][endPoint.Y] != prim.FieldEmpty {
@@ -61,6 +62,7 @@ func SolveMaze(field [][]prim.FieldType, size int) {
 		}
 
 	}
+	field[endPoint.X][endPoint.Y] = prim.FieldEnd
 	visited := make([]prim.Point, 0)
 
 	thing := NewStack[thingy]()
@@ -87,8 +89,6 @@ func SolveMaze(field [][]prim.FieldType, size int) {
 	}
 
 	addThingy(startingPoint)
-	field[startingPoint.X][startingPoint.Y] = prim.FieldStart
-	field[endPoint.X][endPoint.Y] = prim.FieldEnd
 
 	for thing.Len() > 0 {
 		returnValue, err := thing.Pop()
@@ -120,5 +120,6 @@ func SolveMaze(field [][]prim.FieldType, size int) {
 		addThingy(newPoint)
 
 		field[newPoint.X][newPoint.Y] = prim.FieldScanned
+		time.Sleep(10000000)
 	}
 }

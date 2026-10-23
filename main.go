@@ -32,6 +32,6 @@ func tutorMain(a chan [][]prim.FieldType) {
 			}
 		}
 		field := prim.CreateMaze(value, a)
-		dfs.SolveMaze(field, len(field))
+		go dfs.SolveMaze(field, len(field))
 	}
 }
