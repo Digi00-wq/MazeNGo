@@ -56,9 +56,9 @@ func updateField(maze [][]prim.FieldType) {
 			case prim.FieldScanned:
 				rl.DrawRectangle(basePosX+size*int32(i)+int32(offset*i), basePosY+size*int32(j)+int32(offset*j), size, size, rl.Green)
 			case prim.FieldStart:
-				rl.DrawRectangle(basePosX+size*int32(i)+int32(offset*i), basePosY+size*int32(j)+int32(offset*j), size, size, rl.Beige)
+				rl.DrawRectangle(basePosX+size*int32(i)+int32(offset*i), basePosY+size*int32(j)+int32(offset*j), size, size, rl.Gold)
 			case prim.FieldEnd:
-				rl.DrawRectangle(basePosX+size*int32(i)+int32(offset*i), basePosY+size*int32(j)+int32(offset*j), size, size, rl.Beige)
+				rl.DrawRectangle(basePosX+size*int32(i)+int32(offset*i), basePosY+size*int32(j)+int32(offset*j), size, size, rl.Gold)
 			}
 		}
 	}
