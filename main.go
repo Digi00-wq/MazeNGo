@@ -5,6 +5,7 @@ import (
 	"MazeNGo/display"
 	"MazeNGo/prim"
 	"fmt"
+	"strconv"
 	"time"
 )
 
@@ -17,10 +18,20 @@ func main() {
 
 func tutorMain(a chan [][]prim.FieldType) {
 	time.Sleep(100)
+
+	var value int = 21
 	for {
-		var i int
-		fmt.Scan(&i)
-		field := prim.CreateMaze(i, a)
+		var input string
+		fmt.Scanln(&input)
+		if input != "" {
+			i, err := strconv.Atoi(input)
+			if err != nil {
+				continue
+			} else {
+				value = i
+			}
+		}
+		field := prim.CreateMaze(value, a)
 		dfs.SolveMaze(field, len(field))
 	}
 }

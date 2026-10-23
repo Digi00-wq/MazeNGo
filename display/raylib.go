@@ -43,22 +43,21 @@ func updateField(maze [][]prim.FieldType) {
 	var basePosX int32 = 50
 	var basePosY int32 = 50
 	var size int32 = 20
-	offset := 10
 	rl.BeginDrawing()
 	rl.ClearBackground(rl.White)
 	for i := range maze {
 		for j := range maze[0] {
 			switch maze[i][j] {
 			case prim.FieldWall:
-				rl.DrawRectangle(basePosX+size*int32(i)+int32(offset*i), basePosY+size*int32(j)+int32(offset*j), size, size, rl.Black)
+				rl.DrawRectangle(basePosX+size*int32(i), basePosY+size*int32(j), size, size, rl.Black)
 			case prim.FieldEmpty:
-				rl.DrawRectangle(basePosX+size*int32(i)+int32(offset*i), basePosY+size*int32(j)+int32(offset*j), size, size, rl.Red)
+				rl.DrawRectangle(basePosX+size*int32(i), basePosY+size*int32(j), size, size, rl.Red)
 			case prim.FieldScanned:
-				rl.DrawRectangle(basePosX+size*int32(i)+int32(offset*i), basePosY+size*int32(j)+int32(offset*j), size, size, rl.Green)
+				rl.DrawRectangle(basePosX+size*int32(i), basePosY+size*int32(j), size, size, rl.Green)
 			case prim.FieldStart:
-				rl.DrawRectangle(basePosX+size*int32(i)+int32(offset*i), basePosY+size*int32(j)+int32(offset*j), size, size, rl.Gold)
+				rl.DrawRectangle(basePosX+size*int32(i), basePosY+size*int32(j), size, size, rl.Gold)
 			case prim.FieldEnd:
-				rl.DrawRectangle(basePosX+size*int32(i)+int32(offset*i), basePosY+size*int32(j)+int32(offset*j), size, size, rl.Gold)
+				rl.DrawRectangle(basePosX+size*int32(i), basePosY+size*int32(j), size, size, rl.Gold)
 			}
 		}
 	}

@@ -3,7 +3,6 @@ package dfs
 import (
 	"MazeNGo/prim"
 	"errors"
-	"fmt"
 	"math/rand"
 	"time"
 )
@@ -113,15 +112,10 @@ func SolveMaze(field [][]prim.FieldType, size int) {
 		}
 
 		if newPoint == endPoint {
-			fmt.Printf("Found end at: X: %d, Y: %d\n", newPoint.X, newPoint.Y)
 			return
 		}
-
-		fmt.Printf("Visiting: X: %d, Y: %d\n", newPoint.X, newPoint.Y)
 		addThingy(newPoint)
 
 		field[newPoint.X][newPoint.Y] = prim.FieldScanned
 	}
-
-	fmt.Println("No path found to endpoint.")
 }
