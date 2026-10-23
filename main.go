@@ -6,32 +6,38 @@ import (
 	"MazeNGo/prim"
 	"fmt"
 	"strconv"
-	"time"
 )
 
 func main() {
-	a := make(chan [][]prim.FieldType)
-	b := make(chan int)
-	go tutorMain(a)
-	display.InitWindow(a, b)
+	field := make(chan [][]prim.FieldType)
+	width := make(chan int, 1)
+	height := make(chan int, 1)
+	go tutorMain(field, width, height)
+	display.InitWindow(field, width, height)
 }
 
-func tutorMain(a chan [][]prim.FieldType) {
-	time.Sleep(100)
-
-	var value int = 21
+func tutorMain(field chan [][]prim.FieldType, width chan int, height chan int) {
+	var newWidth int = 21
+	var newHeight int = 21
 	for {
 		var input string
 		fmt.Scanln(&input)
 		if input != "" {
-			i, err := strconv.Atoi(input)
+			_, err := strconv.Atoi(input)
 			if err != nil {
 				continue
-			} else {
-				value = i
 			}
 		}
-		field := prim.CreateMaze(value, a)
-		go dfs.SolveMaze(field, len(field))
+		for {
+			select {
+			case newWidth = <-width:
+			case newHeight = <-height:
+			default:
+				goto create
+			}
+		}
+	create:
+		maze := prim.CreateMaze(field, newWidth, newHeight)
+		go dfs.SolveMaze(maze)
 	}
 }

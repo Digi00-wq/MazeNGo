@@ -13,20 +13,37 @@ var (
 	toggle         = 0
 )
 
-func InitWindow(a chan [][]prim.FieldType, b chan int) {
+func InitWindow(field chan [][]prim.FieldType, width chan int, height chan int) {
 	rl.SetConfigFlags(rl.FlagWindowResizable)
 	rl.InitWindow(200, 100, "MazeNGo")
-
-	rl.SetTargetFPS(60)
-
+	rl.SetTargetFPS(120)
+	windowWidth := rl.GetRenderWidth()
+	windowHeight := rl.GetRenderHeight()
+	width <- (windowWidth-100)/20 - 1
+	height <- (windowHeight-100)/20 - 1
 	for !rl.WindowShouldClose() {
-		updateField(Maze)
+		if windowWidth != rl.GetRenderWidth() {
+			windowWidth = rl.GetRenderWidth()
+			select {
+			case <-width:
+			default:
+			}
+			width <- (windowWidth - 100) / 20
+		}
+		if windowHeight != rl.GetRenderHeight() {
+			windowHeight = rl.GetRenderHeight()
+			select {
+			case <-height:
+			default:
+			}
+			height <- (windowHeight - 100) / 20
+		}
 		select {
-		case updatedMaze := <-a:
+		case updatedMaze := <-field:
 			Maze = updatedMaze
 		default:
-			updateField(Maze)
 		}
+		updateField(Maze)
 	}
 
 }
