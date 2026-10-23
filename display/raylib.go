@@ -10,6 +10,7 @@ var (
 	fontSize int32 = 20
 	text           = "Hello world"
 	Maze           = [][]prim.FieldType{{1, 1, 1, 1, 1}, {1, 0, 0, 0, 1}, {1, 1, 0, 0, 1}, {1, 0, 1, 0, 1}, {1, 1, 1, 1, 1}}
+	toggle         = 0
 )
 
 func InitWindow(a chan [][]prim.FieldType, b chan int) {
@@ -57,7 +58,19 @@ func updateField(maze [][]prim.FieldType) {
 			case prim.FieldStart:
 				rl.DrawRectangle(basePosX+size*int32(i), basePosY+size*int32(j), size, size, rl.Gold)
 			case prim.FieldEnd:
-				rl.DrawRectangle(basePosX+size*int32(i), basePosY+size*int32(j), size, size, rl.Gold)
+				thingy := 30
+				if toggle <= thingy {
+					rl.DrawRectangle(basePosX+size*int32(i), basePosY+size*int32(j), size, size, rl.Gold)
+					toggle++
+				} else {
+					rl.DrawRectangle(basePosX+size*int32(i), basePosY+size*int32(j), size, size, rl.White)
+					toggle++
+				}
+
+				if toggle >= thingy*2 {
+					toggle = 0
+				}
+
 			}
 		}
 	}

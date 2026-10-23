@@ -4,6 +4,7 @@ import (
 	"MazeNGo/prim"
 	"errors"
 	"math/rand"
+	"slices"
 	"time"
 )
 
@@ -51,19 +52,21 @@ func SolveMaze(field [][]prim.FieldType, size int) {
 	rng := rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	startingPoint := prim.Point{X: 1, Y: 1}
-	endPoint := prim.Point{X: len(field) - 2, Y: len(field[0]) - 2}
+	endPoint := prim.Point{X: rng.Intn(len(field)-2) + 1, Y: rng.Intn(len(field)-2) + 1}
+	for {
+		if field[endPoint.X][endPoint.Y] != prim.FieldEmpty {
+			endPoint = prim.Point{X: rng.Intn(len(field)-2) + 1, Y: rng.Intn(len(field)-2) + 1}
+		} else {
+			break
+		}
 
+	}
 	visited := make([]prim.Point, 0)
 
 	thing := NewStack[thingy]()
 
 	isVisited := func(p prim.Point) bool {
-		for i := range visited {
-			if visited[i] == p {
-				return true
-			}
-		}
-		return false
+		return slices.Contains(visited, p)
 	}
 
 	isValid := func(p prim.Point) bool {
