@@ -1,6 +1,7 @@
 package main
 
 import (
+	"MazeNGo/dfs"
 	"MazeNGo/display"
 	"MazeNGo/prim"
 	"fmt"
@@ -19,6 +20,7 @@ func tutorMain(a chan [][]prim.FieldType) {
 	for {
 		var i int
 		fmt.Scan(&i)
-		prim.CreateMaze(i, a)
+		field := prim.CreateMaze(i, a)
+		dfs.SolveMaze(field, len(field))
 	}
 }

@@ -5,23 +5,33 @@ import (
 	"time"
 )
 
-type point struct {
-	x, y int
+type Point struct {
+	X, Y int
 }
 
 type Edges struct {
-	wall   point
-	target point
+	Wall   Point
+	Target Point
 }
 
 type FieldType int
 
 const (
-	FieldEmpty FieldType = iota // 0
-	FieldWall                   // 1
+	FieldEmpty   FieldType = iota // 0
+	FieldWall                     // 1
+	FieldScanned                  // 2
+	FieldStart
+	FieldEnd
 )
 
-func CreateMaze(size int, a chan [][]FieldType) {
+var Directions = []Point{
+	{X: 0, Y: -1}, // North
+	{X: 0, Y: 1},  // South
+	{X: -1, Y: 0}, // West
+	{X: 1, Y: 0},  // East
+}
+
+func CreateMaze(size int, a chan [][]FieldType) [][]FieldType {
 	rng := rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	field := make([][]FieldType, size)
@@ -32,24 +42,17 @@ func CreateMaze(size int, a chan [][]FieldType) {
 		}
 	}
 
-	startingCell := point{x: 1, y: 1}
-	field[startingCell.x][startingCell.y] = FieldEmpty
-
-	directions := []point{
-		{x: 0, y: -1}, // North
-		{x: 0, y: 1},  // South
-		{x: -1, y: 0}, // West
-		{x: 1, y: 0},  // East
-	}
+	startingCell := Point{X: 1, Y: 1}
+	field[startingCell.X][startingCell.Y] = FieldEmpty
 
 	var mazeDirections []Edges
 
-	addToList := func(p point) {
-		for _, d := range directions {
-			target := point{x: p.x + d.x*2, y: p.y + d.y*2}
-			if inBounds(target, size) && field[target.x][target.y] == FieldWall {
-				wall := point{x: p.x + d.x, y: p.y + d.y}
-				mazeDirections = append(mazeDirections, Edges{wall: wall, target: target})
+	addToList := func(p Point) {
+		for _, d := range Directions {
+			target := Point{X: p.X + d.X*2, Y: p.Y + d.Y*2}
+			if InBounds(target, size) && field[target.X][target.Y] == FieldWall {
+				wall := Point{X: p.X + d.X, Y: p.Y + d.Y}
+				mazeDirections = append(mazeDirections, Edges{Wall: wall, Target: target})
 			}
 		}
 	}
@@ -63,17 +66,18 @@ func CreateMaze(size int, a chan [][]FieldType) {
 		mazeDirections[idx] = mazeDirections[len(mazeDirections)-1]
 		mazeDirections = mazeDirections[:len(mazeDirections)-1]
 
-		if field[edge.target.x][edge.target.y] == FieldWall {
-			field[edge.wall.x][edge.wall.y] = FieldEmpty
-			field[edge.target.x][edge.target.y] = FieldEmpty
+		if field[edge.Target.X][edge.Target.Y] == FieldWall {
+			field[edge.Wall.X][edge.Wall.Y] = FieldEmpty
+			field[edge.Target.X][edge.Target.Y] = FieldEmpty
 
-			addToList(edge.target)
+			addToList(edge.Target)
 		}
 	}
 
 	a <- field
+	return field
 }
 
-func inBounds(p point, size int) bool {
-	return p.x > 0 && p.x < size-1 && p.y > 0 && p.y < size-1
+func InBounds(p Point, size int) bool {
+	return p.X > 0 && p.X < size-1 && p.Y > 0 && p.Y < size-1
 }
